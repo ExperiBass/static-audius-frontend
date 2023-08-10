@@ -1,4 +1,4 @@
-@import './themes/midnight.css';
+@import './themes/audius.css';
 
 :root {
     --gap: 1rem;
@@ -9,8 +9,8 @@
     --radius: 8px;
 
     --bottom-gradient: -webkit-linear-gradient(top,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0) 80%,
+            #0000 0%,
+            #0000 80%,
             var(--background-color) 100%)
 }
 
@@ -46,21 +46,31 @@ audio {
 }
 
 button {
-    background-color: #4446;
-    border: 1px solid #4446;
+    background-color: var(--tertiary-color);
+    border: var(--border);
     color: var(--primary-color);
     border-radius: var(--radius);
+    padding: var(--quarter-gap);
+    flex: 0.1;
 }
 
 button:hover {
     background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
 }
 
 button:disabled {
     color: #000;
     background-color: #444;
     border-color: #444;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-hover-color);
 }
 
 /* generic styling */
@@ -70,7 +80,7 @@ button:disabled {
 
 .blur {
     border-radius: var(--radius);
-    backdrop-filter: blur(var(--quarter-gap));
+    backdrop-filter: blur(var(--quarter-gap)) brightness(50%);
 }
 
 .buttons {
@@ -99,13 +109,14 @@ button:disabled {
 .stats {
     display: flex;
     width: fit-content;
-    background-color: var(--secondary-color);
+    background-color: var(--tertiary-color);
     border-radius: var(--radius);
     padding: var(--quarter-gap);
 }
 
 .tags {
-    display: flex;
+    display: inline-flex;
+    width: fit-content;
     gap: var(--quarter-gap);
     flex-wrap: wrap;
 }
@@ -135,7 +146,6 @@ button:disabled {
 }
 
 .contentdescription {
-    /* background-color: #4446; */
     padding: var(--quarter-gap);
     width: fit-content;
 }
@@ -143,12 +153,14 @@ button:disabled {
 .contentinfo {
     display: flex;
     flex-direction: row;
+    width: fit-content;
     gap: var(--half-gap);
 }
 
 .contentstats {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: var(--smaller-gap);
 }
 

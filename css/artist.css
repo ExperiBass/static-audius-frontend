@@ -1,10 +1,10 @@
 @import './main.css';
 
-.contentcard:first-child {
+/* .contentcard:first-child {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-top: none;
-}
+} */
 .contentstats {
     flex-direction: row;
     gap: var(--quarter-gap);
@@ -13,9 +13,6 @@
 
 .artworkcontainer {
     margin-top: auto;
-}
-.stats {
-    background-color: #4446;
 }
 
 #artistcontentswitcher {

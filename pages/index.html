@@ -28,8 +28,7 @@
                         <div class="cardmaincontent">
                             <div class="contenttitle">
                                 <a id="track-${track.id}" href="./track.html"><span class="title">${track.title}</span></a>
-                                <br>
-                                by <a id="artist-${track.user.handle}" href="./artist.html">
+                                <a id="artist-${track.user.handle}" href="./artist.html">
                                     <span class="artistname">${track.user.name}</span>
                                 </a>
                             </div>
@@ -50,7 +49,7 @@
                             </div>
                         </div>
                         <div class="position">
-                            <span>#${i + 1}</span>
+                            <span ${colors[i] ? `style="font-weight:bold;color: ${colors[i]}"` : ""}>#${i + 1}</span>
                         </div>
                     </div>
                         `
