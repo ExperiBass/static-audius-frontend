@@ -1,0 +1,27 @@
+@import './main.css';
+
+#trackcontent {
+    display: flex;
+    gap: var(--gap);
+    flex-direction: column;
+}
+
+/* overrides */
+
+.artworkcontainer {
+    max-width: 30%;
+}
+
+.contentcard {
+    border-top: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.contentstats {
+    flex-direction: row;
+    gap: var(--quarter-gap);
+    margin-bottom: var(--half-gap);
+}
+.contentdescription {
+    background-color: unset;
+}

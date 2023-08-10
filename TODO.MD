@@ -1,0 +1,15 @@
+- [ ] make site work
+- - [ ] add artists page
+- - - [x] make it work
+- - - [x] paginate content
+- - - [ ] display albums and playlists
+- - [ ] add search
+- - [ ] make urls in descriptions clickable
+- - [ ] add radio feature (random in tag/genre/mood?)
+- - [ ] errorpages
+- [ ] pretty up site
+- - [ ] display provider
+- - [ ] loading indicators
+- - [ ] add hover cards on artist links
+- - [ ] custom media player?
+- [x] break shit

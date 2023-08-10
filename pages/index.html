@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Trending on Audius</title>
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+        <script src="../scripts/external/numeral.min.js"></script>
+        <script src="../scripts/config.js"></script>
+        <script src="../scripts/common.js"></script>
+        <script src="../scripts/util.js"></script>
+    </head>
+
+    <body>
+        <h1>Trending on Audius</h1>
+        <div id="content"></div>
+        <script>
+            initListeners()
+            const content = document.getElementById('content')
+            requestJSON('tracks/trending').then(res => {
+                for (let i = 0; i < res.length; i++) {
+                    const track = res[i]
+                    const elmstr = `
+                    <div class="contentcard" ${colors[i] ? `style="border-color: ${colors[i]}"` : ""}>
+                        <div class="artworkcontainer">
+                            <img class="artwork" src="${track.artwork['480x480']}" />
+                        </div>
+                        <div class="cardmaincontent">
+                            <div class="contenttitle">
+                                <a id="track-${track.id}" href="./track.html"><span class="title">${track.title}</span></a>
+                                <br>
+                                by <a id="artist-${track.user.handle}" href="./artist.html">
+                                    <span class="artistname">${track.user.name}</span>
+                                </a>
+                            </div>
+                            <div class="contentinfo">
+                                <span class="stats">${buildTimestamp(track.duration)}</span>
+                                <span class="stats">${numeral(track.play_count).format()} plays</span>
+                                <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
+                                <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                            </div>
+                            <div class="contentstats">
+                                <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                            "No Release Date"}</span></span>
+                                <span>Genre: <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
+                                <span>Mood: <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
+                            </div>
+                            <div class="tags">
+                                ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
+                            </div>
+                        </div>
+                        <div class="position">
+                            <span>#${i + 1}</span>
+                        </div>
+                    </div>
+                        `
+
+                    content.innerHTML += elmstr
+                }
+            })
+        </script>
+    </body>
+
+</html>

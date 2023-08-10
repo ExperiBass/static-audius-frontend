@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #b960ff;
+    --secondary-color: #2c00a6;
+    /* --secondary-color: #150050; */
+    --link-color: #FB2576;
+    --link-hover-color: #e20458;
+    --background-color: #000000;
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:hover {
+    color: var(--link-hover-color);
+}

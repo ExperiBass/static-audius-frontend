@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Track</title>
+        <link rel="stylesheet" type="text/css" href="../css/track.css" />
+
+        <script src="../scripts/external/numeral.min.js"></script>
+        <script src="../scripts/config.js"></script>
+        <script src="../scripts/common.js"></script>
+        <script src="../scripts/util.js"></script>
+    </head>
+
+    <body>
+        <div id="trackcontent"></div>
+
+        <script>
+            init()
+            const content = document.getElementById('trackcontent')
+            const trackID = readCookie('track')
+
+
+            async function main() {
+                if (!trackID) {
+                    // needs some sort of error
+                    return
+                }
+                const track = await requestJSON(`tracks/${trackID}`)
+                const stream = await getStreamURL(trackID)
+
+                document.title = `${track.title}`
+
+                const elmstr = `
+                <div class="contentcard">
+                        <div class="artworkcontainer">
+                            <img class="artwork" src="${track.artwork['1000x1000']}" />
+                        </div>
+                        <div class="cardmaincontent">
+                            <div class="contenttitle">
+                                <span class="title">${track.title}</span>
+                                <br>
+                                by <a id="artist-${track.user.handle}" href="./artist.html">
+                                    <span class="artistname">${track.user.name}</span>
+                                </a>
+                            </div>
+                            <div class="contentinfo">
+                                <span class="stats">${buildTimestamp(track.duration)}</span>
+                                <span class="stats">${numeral(track.play_count).format()} plays</span>
+                                <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
+                                <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                            </div>
+                            <div class="contentdescription">
+                                <span>${track.description ? `${nToBr(track.description)}` : "No Description"}<span>
+                            </div>
+                            <div class="contentstats">
+                                <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                        "No Release Date"}</span></span>
+                                <span>Genre: <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
+                                <span>Mood: <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
+                            </div>
+                            <div class="tags">
+                                ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
+                            </div>
+                        </div>
+                        </div>
+                        <audio controls src="${stream}"></audio>
+                        `
+
+                content.innerHTML = elmstr
+            }
+            main()
+        </script>
+    </body>
+
+</html>

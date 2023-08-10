@@ -1,0 +1,146 @@
+@import './themes/midnight.css';
+
+:root {
+    --gap: 1rem;
+    --smaller-gap: calc(var(--gap) * 0.75);
+    --half-gap: calc(var(--gap) * 0.5);
+    --quarter-gap: calc(var(--gap) * 0.25);
+    --micro-gap: calc(var(--gap) * 0.1);
+    --radius: 8px;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    margin: 0;
+}
+
+span {
+    width: fit-content;
+}
+
+img {
+    width: 100%;
+}
+
+/* floating player */
+audio {
+    position: fixed;
+    bottom: 4px;
+    width: 96%;
+    left: 2%;
+    border-radius: var(--radius);
+    background-color: var(--secondary-color);
+}
+button {
+	background-color: #4446;
+	border: 1px solid #4446;
+	color: var(--primary-color);
+	border-radius: var(--radius);
+}
+button:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+button:disabled {
+    color: #000;
+    background-color: #444;
+    border-color: #444;
+}
+
+/* generic styling */
+#content {
+    margin: var(--quarter-gap);
+}
+.buttons {
+	display: flex;
+	justify-content: space-between;
+    margin: var(--quarter-gap);
+}
+.title {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.verified {
+    font-size: 0.5rem;
+}
+
+.position {
+    float: right;
+}
+
+.stats {
+    display: flex;
+    width: fit-content;
+    background-color: var(--secondary-color);
+    border-radius: var(--radius);
+    padding: var(--quarter-gap);
+}
+
+.tags {
+    display: flex;
+    gap: var(--quarter-gap);
+    flex-wrap: wrap;
+}
+
+.contentcard {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--radius);
+    padding: var(--half-gap);
+    margin-bottom: var(--half-gap);
+    gap: var(--gap);
+    justify-content: space-between;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.contenttitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardmaincontent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--half-gap);
+}
+
+.contentdescription {
+    border-radius: var(--radius);
+    background-color: #4446;
+    padding: var(--quarter-gap);
+    width: fit-content;
+    backdrop-filter: blur(var(--quarter-gap));
+}
+
+.contentinfo {
+    display: flex;
+    flex-direction: row;
+    gap: var(--half-gap);
+}
+
+.contentstats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--smaller-gap);
+}
+
+.artworkcontainer {
+    display: flex;
+    flex-shrink: 2;
+    max-width: 10%;
+    margin-bottom: auto;
+}
+
+.artwork {
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}

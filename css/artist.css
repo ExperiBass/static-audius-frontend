@@ -1,0 +1,27 @@
+@import './main.css';
+
+.contentstats {
+    flex-direction: row;
+    gap: var(--quarter-gap);
+    margin-bottom: var(--half-gap);
+}
+
+.artworkcontainer {
+    margin-top: auto;
+}
+.stats {
+    backdrop-filter: blur(var(--quarter-gap));
+    background-color: #4446;
+}
+#artistcard {
+    border: none;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 0px;
+}
+
+#artistcard > .cardmaincontent > .contenttitle {
+    display: inline-flex;
+    flex-direction: row;
+    gap: var(--quarter-gap);
+}
