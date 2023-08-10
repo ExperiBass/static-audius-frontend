@@ -3,6 +3,7 @@
 - - - [x] make it work
 - - - [x] paginate content
 - - - [ ] display albums and playlists
+- - - [ ] fix the blur so the text is clear on all backgrounds
 - - [ ] add search
 - - [ ] make urls in descriptions clickable
 - - [ ] add radio feature (random in tag/genre/mood?)

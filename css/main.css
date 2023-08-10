@@ -23,8 +23,8 @@ span {
 
 img {
     width: 100%;
+    border-radius: var(--radius);
 }
-
 /* floating player */
 audio {
     position: fixed;

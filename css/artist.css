@@ -16,6 +16,7 @@
 #artistcard {
     border: none;
     background-repeat: no-repeat;
+    background-position: top;
     background-size: 100%;
     border-radius: 0px;
 }
