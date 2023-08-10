@@ -86,7 +86,7 @@ a:hover {
 .buttons {
     display: flex;
     justify-content: space-between;
-    margin: var(--quarter-gap);
+    margin-bottom: var(--quarter-gap);
 }
 
 .title {
