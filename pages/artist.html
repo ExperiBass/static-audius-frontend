@@ -71,11 +71,11 @@
                     </div>
                     <div class="cardmaincontent">
                         <div class="contenttitle">
-                            <span class="title">${artist.name}</span>
+                            <span class="title name">${artist.name}</span>
                             ${artist.is_verified ? `<span class="verified">(V)</span>` : ""}
-                            <span class="subtitle">@${artist.handle}</span>
-                            ${artist.location ? `<br><span class="subtitle location">${artist.location}</span>` : ""}
+                            <span class="subtitle handle">@${artist.handle}</span>
                         </div>
+                        ${artist.location ? `<br><span class="subtitle location">${artist.location}</span>` : ""}
                         <div class="contentdescription">
                             <span>${artist.bio ? `${nToBr(artist.bio)}` : ""}<span>
                         </div>
