@@ -2,7 +2,7 @@
 - - [ ] add artists page
 - - - [x] make it work
 - - - [x] paginate content
-- - - [ ] display albums and playlists
+- - - [ ] display albums and playlists (how lol, api doesnt give me that)
 - - - [ ] fix the blur so the text is clear on all backgrounds
 - - [ ] add search
 - - [ ] make urls in descriptions clickable

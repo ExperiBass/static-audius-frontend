@@ -14,13 +14,44 @@
 
     <body>
         <script>
-            function buildTrackPage(tracks) {
+            function buildTrackList(tracks) {
                 let elmstr = ""
                 for (const track of tracks) {
                     elmstr += `
                     <div class="contentcard">
                         <div class="artworkcontainer">
                             <img class="artwork" src="${track.artwork['480x480']}" />
+                        </div>
+                        <div class="cardmaincontent">
+                            <div class="contenttitle">
+                                <a id="track-${track.id}" href="./track.html"><span class="title">${track.title}</span></a>
+                                <br>
+                                <span>by <span class="artistname">${track.user.name}</span></span>
+
+                            </div>
+                            <div class="contentinfo">
+                                <span class="stats">${buildTimestamp(track.duration)}</span>
+                                <span class="stats">${numeral(track.play_count).format()} plays</span>
+                                <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
+                                <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                            </div>
+                            <div class="tags">
+                                ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+                return elmstr
+            }
+
+            function buildAlbumList(albums) {
+                let elmstr = ""
+                for (const album of albums) {
+                    elmstr += `
+                    <div class="contentcard">
+                        <div class="artworkcontainer">
+                            <img class="artwork" src="${album.artwork['480x480']}" />
                         </div>
                         <div class="cardmaincontent">
                             <div class="contenttitle">
@@ -59,63 +90,92 @@
                     return
                 }
                 const artist = await requestJSON(`users/handle/${artistName}`)
-                const commonlyUsedTags = await requestJSON(`users/${artist.id}/tags`, {limit: 5})
+                const commonlyUsedTags = await requestJSON(`users/${artist.id}/tags`, { limit: 5 })
 
 
                 document.title = `${artist.name}`
 
                 let elmstr = `
-                <div id="artistcard" class="contentcard" style="background-image: url('${artist.cover_photo['2000x']}');">
+                <div id="artistcard" class="contentcard" style="background-image:var(--bottom-gradient),url('${artist.cover_photo['2000x']}');">
                     <div class="artworkcontainer">
                         <img class="artwork" src="${artist.profile_picture['1000x1000']}" />
                     </div>
                     <div class="cardmaincontent">
-                        <div class="contenttitle">
-                            <span class="title name">${artist.name}</span>
-                            ${artist.is_verified ? `<span class="verified">(V)</span>` : ""}
-                            <span class="subtitle handle">@${artist.handle}</span>
-                        </div>
-                        ${artist.location ? `<br><span class="subtitle location">${artist.location}</span>` : ""}
-                        <div class="contentdescription">
-                            <span>${artist.bio ? `${nToBr(artist.bio)}` : ""}<span>
-                        </div>
-                        <div class="contentstats">
-                            <span class="stats followers">${artist.follower_count ? `${numeral(artist.follower_count).format()}`
+                        <div class="blur" style="width:fit-content;padding-inline:var(--quarter-gap);">
+                            <div class="contenttitle">
+                                <span class="title name">${artist.name}</span>
+                                ${artist.is_verified ? `<span class="verified">(V)</span>` : ""}
+                                <span class="subtitle handle">@${artist.handle}</span>
+                            </div>
+                            ${artist.location ? `<br><span class="subtitle location">${artist.location}</span>` : ""}
+                            <div class="contentdescription">
+                                <span>${artist.bio ? `${nToBr(artist.bio)}` : ""}<span>
+                            </div>
+                            <div class="contentstats">
+                                <span class="stats followers">${artist.follower_count ? `${numeral(artist.follower_count).format()}`
                         : "0"} Followers</span>
-                            <span class="stats following">${artist.followee_count ? `${numeral(artist.followee_count).format()}`
+                                <span class="stats following">${artist.followee_count ? `${numeral(artist.followee_count).format()}`
                         : "0"} Following</span>
-                            <span class="stats reposts">${artist.repost_count ? `${numeral(artist.repost_count).format()}`
+                                <span class="stats reposts">${artist.repost_count ? `${numeral(artist.repost_count).format()}`
                         : "0"} Reposts</span>
-                            <span class="stats tracks">${artist.track_count ? `${numeral(artist.track_count).format()}`
+                                <span class="stats tracks">${artist.track_count ? `${numeral(artist.track_count).format()}`
                         : "0"} Tracks</span>
-                            <span class="stats albums">${artist.album_count ? `${numeral(artist.album_count).format()}`
+                                <span class="stats albums">${artist.album_count ? `${numeral(artist.album_count).format()}`
                         : "0"} Albums</span>
-                            <span class="stats playlists">${artist.playlist_count ? `${numeral(artist.playlist_count).format()}`
+                                <span class="stats playlists">${artist.playlist_count ? `${numeral(artist.playlist_count).format()}`
                         : "0"} Playlists</span>
 
+                            </div>
                         </div>
                         <div class="tags">
                             ${commonlyUsedTags && commonlyUsedTags[0] ? buildTags(commonlyUsedTags.join(',')) : buildTags("No Tags")}
                         </div>
                     </div>
-                </div>
-                `
+                </div>`
 
+                elmstr += '<div id="content">'
                 // add buttons
-                elmstr += '<div class="buttons"><button id="prev" onclick="paginator.prev()">prev</button><button id="next" onclick="paginator.next()">next</button></div>'
-                elmstr += '<div id="content"></div>'
+                elmstr += `<div class="buttons">
+                                <button id="prev" onclick="paginator.prev()">Prev</button>
+                                <button id="next" onclick="paginator.next()">Next</button>
+                            </div>`
+                /*
+                elmstr += `<div id="artistcontentswitcher">
+                                <button id="tracks" onclick="">Tracks</button>
+                                <button id="albums" onclick="">Albums</button>
+                                <button id="playlists" onclick="">Playlists</button>
+                            </div>`
+                */
+                elmstr += '<div id="artistcontent"></div>'
+                elmstr += '</div>'
                 document.body.innerHTML = cleanHTML(elmstr)
 
                 // now, start paginating the tracks
-                const paginator = new Pageinator5000({
-                    containerElm: document.getElementById('content'),
-                    prevButton: document.getElementById('prev'),
-                    nextButton: document.getElementById('next'),
-                    endpoint: `users/${artist.id}/tracks`,
-                    contentFunction: buildTrackPage
-                })
-                paginator.start()
-                window.paginator = paginator
+                const paginators = {
+                    tracks: new Pageinator5000({
+                        containerElm: document.getElementById('artistcontent'),
+                        prevButton: document.getElementById('prev'),
+                        nextButton: document.getElementById('next'),
+                        endpoint: `users/${artist.id}/tracks`,
+                        contentFunction: buildTrackList
+                    }),
+                    // albums: new Pageinator5000({
+                    //     containerElm: document.getElementById('artistcontent'),
+                    //     prevButton: document.getElementById('prev'),
+                    //     nextButton: document.getElementById('next'),
+                    //     endpoint: `users/${artist.id}/albums`,
+                    //     contentFunction: buildTrackList
+                    // })
+                }
+                window.paginator = paginators.tracks
+
+                window.paginator.start()
+
+                // set button listeners
+                const onclick = (ev) => { window._selectedContent = ev.target.id }
+                for (const button of document.getElementById('artistcontentswitcher').children) {
+                    button.onclick = onclick
+                }
             }
             main()
         </script>

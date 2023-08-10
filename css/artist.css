@@ -1,5 +1,10 @@
 @import './main.css';
 
+.contentcard:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-top: none;
+}
 .contentstats {
     flex-direction: row;
     gap: var(--quarter-gap);
@@ -10,18 +15,31 @@
     margin-top: auto;
 }
 .stats {
-    backdrop-filter: blur(var(--quarter-gap));
     background-color: #4446;
+}
+
+#artistcontentswitcher {
+    display: flex;
+}
+#artistcontentswitcher > button {
+    flex: 1;
+    border: 0px;
+    border-radius: 0px;
+}
+#artistcontentswitcher > button:first-child {
+    border-top-left-radius: var(--radius);
+}
+#artistcontentswitcher > button:last-child {
+    border-top-right-radius: var(--radius);
 }
 #artistcard {
     border: none;
     background-repeat: no-repeat;
     background-position: top;
-    background-size: 100%;
+    background-size: cover;
     border-radius: 0px;
 }
-
-#artistcard > .cardmaincontent > .contenttitle {
+#artistcard > * > * > .contenttitle {
     display: inline-flex;
     flex-direction: row;
     gap: var(--quarter-gap);
