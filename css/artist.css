@@ -5,30 +5,32 @@
     border-top-right-radius: 0px;
     border-top: none;
 } */
-.contentstats {
-    flex-direction: row;
-    gap: var(--quarter-gap);
+#artistcard>.cardmaincontent>*>.contentstats {
     margin-bottom: var(--half-gap);
 }
 
-.artworkcontainer {
+#artistcard>.artworkcontainer {
     margin-top: auto;
 }
 
 #artistcontentswitcher {
     display: flex;
 }
-#artistcontentswitcher > button {
+
+#artistcontentswitcher>button {
     flex: 1;
     border: 0px;
     border-radius: 0px;
 }
-#artistcontentswitcher > button:first-child {
+
+#artistcontentswitcher>button:first-child {
     border-top-left-radius: var(--radius);
 }
-#artistcontentswitcher > button:last-child {
+
+#artistcontentswitcher>button:last-child {
     border-top-right-radius: var(--radius);
 }
+
 #artistcard {
     border: none;
     border-bottom-left-radius: 0px;
@@ -38,7 +40,8 @@
     background-position: top;
     background-size: cover;
 }
-#artistcard > * > * > .contenttitle {
+
+#artistcard>*>*>.contenttitle {
     display: inline-flex;
     flex-direction: row;
     gap: var(--quarter-gap);

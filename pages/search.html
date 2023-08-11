@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 
 <html>
+
     <head>
         <title>Search</title>
+        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+        <script src="../scripts/external/numeral.min.js"></script>
+        <script src="../scripts/config.js"></script>
+        <script src="../scripts/common.js"></script>
+        <script src="../scripts/util.js"></script>
     </head>
+
     <body>
-        
+        <script>
+            init().then(async () => {
+                const content = document.getElementById('content')
+                const query = sanitizeInput(parseQuery(window.location).get('query'))
+
+                if (!query) {
+                    content.innerText = "The query URL param is missing!"
+                    return
+                }
+                const trackResults = makeRequest(`tracks/search`, { query: query })
+                const playlistResults = makeRequest(`playlists/search`, { query: query })
+                const userResults = makeRequest(`users/search`, { query: query })
+
+                const results = await Promise.allSettled([trackResults, playlistResults, userResults])
+
+                for (const result of results) {
+                    // i remember allSettled not keeping the order...
+                }
+            })
+        </script>
     </body>
+
 </html>

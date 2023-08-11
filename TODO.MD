@@ -4,7 +4,7 @@
 - - - [x] paginate content
 - - - [ ] display albums and playlists (how lol, api doesnt give me that)
 - - - [ ] fix the blur so the text is clear on all backgrounds
-- - [ ] add search
+- - [ ] add search page
 - - [ ] make urls in descriptions clickable
 - - [ ] add radio feature (random in tag/genre/mood?)
 - - [ ] errorpages

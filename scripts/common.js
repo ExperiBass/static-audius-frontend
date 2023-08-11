@@ -17,7 +17,9 @@ function followConfig() {
 }
 
 // bundle everything in a neat bow
-function init() {
+async function init() {
+    // setup page
+    document.body.innerHTML = await requestHTML('basepage')
     followConfig()
     initListeners()
 }

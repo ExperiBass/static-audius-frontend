@@ -6,4 +6,6 @@
     --link-color: #FB2576;
     --link-hover-color: #e20458;
     --background-color: #000000;
+
+    --border: 1px solid var(--secondary-color);
 }

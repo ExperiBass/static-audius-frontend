@@ -1,4 +1,4 @@
-@import './themes/audius.css';
+@import './themes/midnight.css';
 
 :root {
     --gap: 1rem;
@@ -65,8 +65,14 @@ button:disabled {
 }
 
 ul {
-    list-style-type: none;
-    padding-left: var(--gap);
+    list-style-type: "-";
+    padding-left: 0;
+}
+input {
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    border: var(--border);
+    border-radius: var(--radius);
 }
 
 a {
@@ -86,11 +92,13 @@ a:hover {
 .column {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .row {
     display: flex;
     flex-direction: row;
+    flex: 1;
 }
 
 .blur {
@@ -138,12 +146,23 @@ a:hover {
 }
 
 #sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     padding: var(--quarter-gap);
-    max-width: 25%;
+    padding-left: var(--gap);
+    max-width: 15%;
+    flex: 1;
+    border-right: var(--border);
+    gap: var(--quarter-gap);
 }
-
+#sidebar > input {
+    width: 90%;
+}
 .maincontainer {
-    padding: var(--quarter-gap);
+    padding: 0;
+    margin: 0;
+    gap: var(--quarter-gap);
 }
 
 .contentcard {
@@ -190,7 +209,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--smaller-gap);
+    gap: var(--quarter-gap);
 }
 
 .artworkcontainer {

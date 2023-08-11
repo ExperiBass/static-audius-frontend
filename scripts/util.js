@@ -3,6 +3,11 @@ async function requestJSON(endpoint, additionalQueries) {
 
     return res.data ? res.data : res
 }
+async function requestHTML(snippet) {
+    const res = await (await fetch(`/html/${snippet}.html`)).text()
+
+    return res || null
+}
 
 async function makeRequest(endpoint, additionalQueries, fetchOptions) {
     let res;
@@ -33,6 +38,10 @@ async function getStreamURL(track) {
 
 function nToBr(str) {
     return str.replace(/\n/gi, '<br>')
+}
+
+function sanitizeInput(str) {
+    return str?.replace(/[^a-z0-9_-]/gi, '').trim()
 }
 
 /**

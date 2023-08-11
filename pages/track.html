@@ -13,23 +13,12 @@
     </head>
 
     <body>
-        <div class="maincontainer row">
-            <div id="sidebar">
-                <h3>static-audius-client</h3>
-                <ul>
-                </ul>
-            </div>
-            <div class="column">
-                <div id="trackcontent"></div>
-            </div>
-        </div>
-
         <script>
-            init()
-            const content = document.getElementById('trackcontent')
-            const trackID = parseQuery(window.location).get('track')
+            init().then(async () => {
 
-            async function main() {
+                const content = document.getElementById('content')
+                const trackID = parseQuery(window.location).get('track')
+
                 if (!trackID) {
                     // needs some sort of error
                     content.innerText = "The track url param is missing!"
@@ -41,15 +30,14 @@
                 document.title = `${track.title}`
 
                 const elmstr = `
-                <div class="contentcard">
+                    <div class="contentcard">
                         <div class="artworkcontainer">
                             <img class="artwork" src="${track.artwork['1000x1000']}" />
                         </div>
                         <div class="cardmaincontent">
                             <div class="contenttitle">
                                 <span class="title">${track.title}</span>
-                                <br>
-                                by <a id="artist-${track.user.handle}" href="./artist.html">
+                                <a id="artist-${track.user.handle}" href="./artist.html?artist=${track.user.handle}">
                                     <span class="artistname">${track.user.name}</span>
                                 </a>
                             </div>
@@ -63,7 +51,8 @@
                                 <span>${track.description ? `${nToBr(track.description)}` : "No Description"}<span>
                             </div>
                             <div class="contentstats">
-                                <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                                <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}`
+                        :
                         "No Release Date"}</span></span>
                                 <span>Genre: <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
                                 <span>Mood: <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
@@ -72,13 +61,12 @@
                                 ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
                             </div>
                         </div>
-                        </div>
-                        <audio controls src="${stream}"></audio>
-                        `
+                    </div>
+                    <audio controls src="${stream}"></audio>
+                    `
 
                 content.innerHTML = elmstr
-            }
-            main()
+            })
         </script>
     </body>
 
