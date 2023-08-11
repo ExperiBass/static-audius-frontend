@@ -13,6 +13,17 @@
     </head>
 
     <body>
+        <div class="maincontainer row">
+            <div id="sidebar" class="column">
+                <h3>static-audius-client</h3>
+                <ul>
+                    <li><a href="./index.html">Trending</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <div id="content"></div>
+            </div>
+        </div>
         <script>
             function buildTrackList(tracks) {
                 let elmstr = ""
@@ -24,7 +35,7 @@
                         </div>
                         <div class="cardmaincontent">
                             <div class="contenttitle">
-                                <a id="track-${track.id}" href="./track.html"><span class="title">${track.title}</span></a>
+                                <a id="track-${track.id}" href="./track.html?track=${track.id}"><span class="title">${track.title}</span></a>
                                 <br>
                                 <span>by <span class="artistname">${track.user.name}</span></span>
 
@@ -81,12 +92,13 @@
         <script>
             init()
             const content = document.getElementById('content')
-            const artistName = readCookie('artist')
+            const artistName = parseQuery(window.location).get('artist')
 
 
             async function main() {
                 if (!artistName) {
                     // needs some sort of error
+                    content.innerText = "The artist url param is missing!"
                     return
                 }
                 const artist = await requestJSON(`users/handle/${artistName}`)
@@ -133,7 +145,7 @@
                     </div>
                 </div>`
 
-                elmstr += '<div id="content">'
+                //elmstr += '<div id="content">'
                 // add buttons
                 elmstr += `<div class="buttons">
                                 <button id="prev" onclick="paginator.prev()">Prev</button>
@@ -147,8 +159,8 @@
                             </div>`
                 */
                 elmstr += '<div id="artistcontent"></div>'
-                elmstr += '</div>'
-                document.body.innerHTML = cleanHTML(elmstr)
+                //elmstr += '</div>'
+                content.innerHTML = cleanHTML(elmstr)
 
                 // now, start paginating the tracks
                 const paginators = {

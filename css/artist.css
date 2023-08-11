@@ -34,7 +34,6 @@
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-    border-radius: 0px;
 }
 #artistcard > * > * > .contenttitle {
     display: inline-flex;

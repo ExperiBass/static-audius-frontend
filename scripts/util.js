@@ -84,6 +84,9 @@ function readCookie(name) {
     const cookie = document.cookie.split('; ').find(v => v.split('=')[0] === name)
     return cookie?.split('=')[1] || null
 }
+function parseQuery(location) {
+    return new URLSearchParams(location.search)
+}
 
 class Pageinator5000 {
     #containerElm = null
@@ -172,4 +175,8 @@ class Pageinator5000 {
         this.#containerElm.innerHTML = this.#contentFunction(data)
         this.#unlockButtons()
     }
+}
+
+function submitSearch(form) {
+
 }

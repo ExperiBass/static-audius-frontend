@@ -42,11 +42,11 @@ audio {
     width: 96%;
     left: 2%;
     border-radius: var(--radius);
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-background-color);
 }
 
 button {
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-background-color);
     border: var(--border);
     color: var(--primary-color);
     border-radius: var(--radius);
@@ -64,6 +64,11 @@ button:disabled {
     border-color: #444;
 }
 
+ul {
+    list-style-type: none;
+    padding-left: var(--gap);
+}
+
 a {
     text-decoration: none;
     color: var(--link-color);
@@ -76,6 +81,16 @@ a:hover {
 /* generic styling */
 #content {
     margin: var(--quarter-gap);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
 
 .blur {
@@ -119,18 +134,28 @@ a:hover {
     width: fit-content;
     gap: var(--quarter-gap);
     flex-wrap: wrap;
+    margin-top: auto;
+}
+
+#sidebar {
+    padding: var(--quarter-gap);
+    max-width: 25%;
 }
 
 .contentcard {
     display: flex;
     flex-wrap: wrap;
     height: fit-content;
-    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-background-color);
+    border: var(--border);
     border-radius: var(--radius);
     padding: var(--half-gap);
     margin-bottom: var(--half-gap);
     gap: var(--gap);
     justify-content: space-between;
+
+    /* box-shadow: 0px 0px 2rem 0px var(--quadrary-color)  inset; */
+    /* -webkit-box-shadow: 0px 0px 2rem 0px var(--quadrary-color) inset; */
 }
 
 .contenttitle {

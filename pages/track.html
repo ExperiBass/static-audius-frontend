@@ -13,17 +13,27 @@
     </head>
 
     <body>
-        <div id="trackcontent"></div>
+        <div class="maincontainer row">
+            <div id="sidebar">
+                <h3>static-audius-client</h3>
+                <ul>
+                </ul>
+            </div>
+            <div class="column">
+                <div id="trackcontent"></div>
+            </div>
+        </div>
 
         <script>
             init()
             const content = document.getElementById('trackcontent')
-            const trackID = readCookie('track')
-
+            //const trackID = readCookie('track')
+            const trackID = parseQuery(window.location).get('track')
 
             async function main() {
                 if (!trackID) {
                     // needs some sort of error
+                    content.innerText = "The track url param is missing!"
                     return
                 }
                 const track = await requestJSON(`tracks/${trackID}`)
