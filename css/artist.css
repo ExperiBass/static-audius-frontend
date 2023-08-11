@@ -31,6 +31,9 @@
 }
 #artistcard {
     border: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;

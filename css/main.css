@@ -142,6 +142,10 @@ a:hover {
     max-width: 25%;
 }
 
+.maincontainer {
+    padding: var(--quarter-gap);
+}
+
 .contentcard {
     display: flex;
     flex-wrap: wrap;
