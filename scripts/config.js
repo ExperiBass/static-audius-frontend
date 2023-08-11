@@ -7,8 +7,8 @@ const config = {
     clientNick: "",
     // true if you want dates to be in your local timezone, false for utc-0
     localDate: false,
-    // do you want numbers displayed in full (123,456, true) or shortened (123.45k, false)?
-    fullNumbers: false
+    // NumeralJS number format string
+    numberFormat: '0,0a'
 }
 
 window._config = config

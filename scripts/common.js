@@ -9,9 +9,11 @@ function initListeners() {
     }
 }
 function followConfig() {
-    if (!window._config.fullNumbers) {
+    if (!window._config.numberFormat) {
         numeral.defaultFormat('0a')
+        return
     }
+    numeral.defaultFormat(window._config.numberFormat)
 }
 
 // bundle everything in a neat bow
