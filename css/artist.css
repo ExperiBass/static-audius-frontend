@@ -5,8 +5,14 @@
     border-top-right-radius: 0px;
     border-top: none;
 } */
-#artistcard>.cardmaincontent>*>.contentstats {
+#artistcard>.cardmaincontent>.blur>.contentstats {
     margin-bottom: var(--half-gap);
+}
+#artistcard>.cardmaincontent>.blur>.contentdescription {
+    width: fit-content;
+}
+#artistcard>.cardmaincontent>.blur>.tags {
+    margin-top: auto;
 }
 
 #artistcard>.artworkcontainer {

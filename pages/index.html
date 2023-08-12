@@ -15,10 +15,10 @@
         <script>
             init().then(async () => {
                 const content = document.getElementById('content')
-                requestJSON('tracks/trending').then(res => {
-                    for (let i = 0; i < res.length; i++) {
-                        const track = res[i]
-                        const elmstr = `
+                const tracks = await requestJSON('tracks/trending')
+                for (let i = 0; i < tracks.length; i++) {
+                    const track = tracks[i]
+                    const elmstr = `
                             <div class="contentcard" ${colors[i] ? `style="border-color: ${colors[i]}"` : ""}>
                                 <div class="artworkcontainer">
                                     <img class="artwork" src="${track.artwork['480x480']}" />
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="contentstats">
                                         <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
-                                        "No Release Date"}</span></span>
+                            "No Release Date"}</span></span>
                                         <span>Genre: <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
                                         <span>Mood: <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
                                     </div>
@@ -52,9 +52,8 @@
                             </div>
                         `
 
-                        content.innerHTML += elmstr
-                    }
-                })
+                    content.innerHTML += elmstr
+                }
             })
         </script>
     </body>

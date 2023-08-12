@@ -44,6 +44,7 @@ function sanitizeInput(str) {
     return str?.replace(/[^a-z0-9_-]/gi, '').trim()
 }
 
+
 /**
  * https://audiusproject.github.io/api-docs/#tocS_Track
  * Track.tags
@@ -184,8 +185,4 @@ class Pageinator5000 {
         this.#containerElm.innerHTML = this.#contentFunction(data)
         this.#unlockButtons()
     }
-}
-
-function submitSearch(form) {
-
 }

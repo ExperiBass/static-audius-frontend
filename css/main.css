@@ -92,13 +92,15 @@ a:hover {
 .column {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .row {
     display: flex;
     flex-direction: row;
-    flex: 1;
+    width: 100%;
+    overflow-x: scroll;
 }
 
 .blur {
@@ -135,6 +137,8 @@ a:hover {
     background-color: var(--tertiary-color);
     border-radius: var(--radius);
     padding: var(--quarter-gap);
+    flex-shrink: 1;
+    white-space: nowrap;
 }
 
 .tags {
@@ -142,7 +146,6 @@ a:hover {
     width: fit-content;
     gap: var(--quarter-gap);
     flex-wrap: wrap;
-    margin-top: auto;
 }
 
 #sidebar {
@@ -151,7 +154,7 @@ a:hover {
     justify-content: start;
     padding: var(--quarter-gap);
     padding-left: var(--gap);
-    max-width: 15%;
+    /* max-width: 15%; */
     flex: 1;
     border-right: var(--border);
     gap: var(--quarter-gap);
@@ -160,14 +163,24 @@ a:hover {
     width: 90%;
 }
 .maincontainer {
+    overflow-x: hidden;
+    width: 100%;
     padding: 0;
     margin: 0;
     gap: var(--quarter-gap);
+}
+.maincontainer > div {
+    max-width: 100%;
+    flex: 1;
+}
+#content {
+    display: flex;
 }
 
 .contentcard {
     display: flex;
     flex-wrap: wrap;
+    flex: 1;
     height: fit-content;
     background-color: var(--secondary-background-color);
     border: var(--border);
@@ -180,10 +193,25 @@ a:hover {
     /* box-shadow: 0px 0px 2rem 0px var(--quadrary-color)  inset; */
     /* -webkit-box-shadow: 0px 0px 2rem 0px var(--quadrary-color) inset; */
 }
+.minicontentcard {
+    min-width: 15%;
+    max-width: 33.33%;
+    justify-content: start;
+    height: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.minicontentcard > .artworkcontainer {
+    max-width: 100%;
+}
+.minicontentcard > .cardmaincontent > .tags {
+    width: 100%;
+}
 
 .contenttitle {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .cardmaincontent {
@@ -191,17 +219,19 @@ a:hover {
     flex: 1;
     flex-direction: column;
     gap: var(--half-gap);
+    width: 100%;
 }
 
 .contentdescription {
     padding: var(--quarter-gap);
-    width: fit-content;
+    width: 100%;
 }
 
 .contentinfo {
     display: flex;
     flex-direction: row;
-    width: fit-content;
+    flex-wrap: wrap;
+    width: 100%;
     gap: var(--half-gap);
 }
 
@@ -214,7 +244,7 @@ a:hover {
 
 .artworkcontainer {
     display: flex;
-    flex-shrink: 2;
+    flex-shrink: 1;
     max-width: 10%;
     margin-bottom: auto;
 }
