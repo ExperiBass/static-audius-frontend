@@ -4,7 +4,7 @@
 
     <head>
         <title>Search</title>
-        <link rel="stylesheet" type="text/css" href="../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../css/search.css" />
 
         <script src="../scripts/external/numeral.min.js"></script>
         <script src="../scripts/config.js"></script>
@@ -24,12 +24,12 @@
                 }
                 const trackRequest = makeRequest(`tracks/search`, { query: query })
                 const playlistRequest = makeRequest(`playlists/search`, { query: query })
-                const userRequest = makeRequest(`users/search`, { query: query })
+                const artistRequest = makeRequest(`users/search`, { query: query })
 
-                const results = await Promise.allSettled([trackRequest, playlistRequest, userRequest])
+                const results = await Promise.allSettled([trackRequest, playlistRequest, artistRequest])
                 window.results = results
 
-                const [trackResult, playlistResult, userResult] = results
+                const [trackResult, playlistResult, artistResult] = results
 
                 // build the result divs
                 content.innerHTML = `
@@ -38,39 +38,108 @@
                     <h3>Playlists</h3>
                     <div id="playlists" class="searchcontent row"></div>
                     <h3>Users</h3>
-                    <div id="users" class="searchcontent row"></div>
+                    <div id="artists" class="searchcontent row"></div>
                 `
 
                 const tracksDiv = document.getElementById('tracks')
                 const playlistsDiv = document.getElementById('playlists')
-                const usersDiv = document.getElementById('users')
+                const artistsDiv = document.getElementById('artists')
 
                 if (trackResult.status === "fulfilled") {
-                    const tracks = (await trackResult.value.json()).data
-                    for (const track of tracks) {
-                        const elmstr = `
-                            <div class="contentcard minicontentcard">
-                                <div class="artworkcontainer">
-                                    <img class="artwork" src="${track.artwork['480x480']}" />
-                                </div>
-                                <div class="cardmaincontent">
-                                    <div class="contenttitle">
-                                        <a id="track-${track.id}" href="./track.html?track=${track.id}"><span class="title">${track.title}</span></a>
-                                        <a id="artist-${track.user.handle}" href="./artist.html?artist=${track.user.handle}">
-                                            <span class="artistname">${track.user.name}</span>
-                                        </a>
+                    // wrap in a async function so the three divs can be populated "parallely"
+                    async function populatePlaylists() {
+                        const tracks = (await trackResult.value.json()).data
+
+                        for (const track of tracks) {
+                            const elmstr = `
+                                <div class="contentcard minicontentcard">
+                                    <div class="artworkcontainer">
+                                        <img class="artwork" src="${track.artwork['480x480']}" />
                                     </div>
-                                    <div class="contentinfo">
-                                        <span class="stats">${buildTimestamp(track.duration)}</span>
-                                        <span class="stats">${numeral(track.play_count).format()} plays</span>
-                                        <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
-                                        <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                                    <div class="cardmaincontent">
+                                        <div class="contenttitle">
+                                            <a id="track-${track.id}" href="./track.html?track=${track.id}"><span class="title">${track.title}</span></a>
+                                            <a id="artist-${track.user.handle}" href="./artist.html?artist=${track.user.handle}">
+                                                <span class="artistname">${track.user.name}</span>
+                                            </a>
+                                        </div>
+                                        <div class="contentinfo">
+                                            <span class="stats duration">${buildTimestamp(track.duration)}</span>
+                                            <span class="stats playcount">${numeral(track.play_count).format()} plays</span>
+                                            <span class="stats favoritecount">${numeral(track.favorite_count).format()} favorites</span>
+                                            <span class="stats repostcount">${numeral(track.repost_count).format()} reposts</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        `
-                        tracksDiv.innerHTML += elmstr
+                            `
+                            tracksDiv.innerHTML += elmstr
+                        }
                     }
+                    populatePlaylists()
+                }
+
+                if (playlistResult.status === "fulfilled") {
+                    async function populatePlaylists() {
+                        const playlists = (await playlistResult.value.json()).data
+
+                        for (const playlist of playlists) {
+                            const elmstr = `
+                                <div class="contentcard minicontentcard">
+                                    <div class="artworkcontainer">
+                                        <img class="artwork" src="${playlist.artwork['480x480']}" />
+                                    </div>
+                                    <div class="cardmaincontent">
+                                        <div class="contenttitle">
+                                            <a id="playlist-${playlist.id}" href="./playlist.html?playlist=${playlist.id}">
+                                                <span class="title playlistname">${playlist.playlist_name}</span>
+                                            </a>
+                                            <a class="artistname" href="./artist.html?artist=${playlist.user.handle}">
+                                                <span>${playlist.user.name}</span>
+                                            </a>
+                                        </div>
+                                        <div class="contentinfo">
+                                            <span class="stats playcount">${numeral(playlist.total_play_count).format()} plays</span>
+                                            <span class="stats favoritecount">${numeral(playlist.favorite_count).format()} favorites</span>
+                                            <span class="stats repostcount">${numeral(playlist.repost_count).format()} reposts</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                            playlistsDiv.innerHTML += elmstr
+                        }
+                    }
+                    populatePlaylists()
+                }
+
+                if (artistResult.status === "fulfilled") {
+                    async function populateArtists() {
+                        const artists = (await artistResult.value.json()).data
+
+                        for (const artist of artists) {
+                            const elmstr = `
+                                <div class="contentcard minicontentcard">
+                                    <div class="artworkcontainer">
+                                        <img class="artwork" src="${artist.profile_picture['480x480']}" />
+                                    </div>
+                                    <div class="cardmaincontent">
+                                        <div class="contenttitle">
+                                            <a href="./artist.html?artist=${artist.name}">
+                                            <span class="title artistname">${artist.name}</span>
+                                            ${artist.is_verified ? `<span class="verified">(V)</span>` : ""}
+                                            </a>
+                                            <span class="subtitle handle">@${artist.handle}</span>
+                                        </div>
+                                        <div class="contentinfo">
+                                            <span class="stats followers">${artist.follower_count ? `${numeral(artist.follower_count).format()}`
+                                                : "0"} Followers</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                            artistsDiv.innerHTML += elmstr
+                        }
+                    }
+                    populateArtists()
                 }
             })
         </script>

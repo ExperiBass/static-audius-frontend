@@ -3,11 +3,17 @@
 - - - [x] make it work
 - - - [x] paginate content
 - - - [ ] display albums and playlists (how lol, api doesnt give me that)
-- - - [ ] fix the blur so the text is clear on all backgrounds
-- - [ ] add search page
+- - - [x] fix the blur so the text is clear on all backgrounds
+- - [x] add search page
+- - [ ] add playlist page
 - - [ ] make urls in descriptions clickable
 - - [ ] add radio feature (random in tag/genre/mood?)
-- - [ ] errorpages
+- - [ ] ERRORS
+- - - [ ] artist
+- - - [ ] index
+- - - [ ] playlist
+- - - [ ] search
+- - - [ ] track
 - [ ] pretty up site
 - - [ ] display provider
 - - [ ] loading indicators
