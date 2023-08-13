@@ -98,7 +98,6 @@ a:hover {
 .column {
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
     overflow-y: scroll;
     gap: var(--quarter-gap);
 }
@@ -106,7 +105,6 @@ a:hover {
 .row {
     display: flex;
     flex-direction: row;
-    /* width: 100%; */
     overflow-x: scroll;
     gap: var(--quarter-gap);
 }
@@ -173,8 +171,6 @@ a:hover {
 }
 
 .maincontainer {
-    overflow-x: hidden;
-    /* width: 100%; */
     padding: var(--quarter-gap);
     margin: 0;
     gap: var(--quarter-gap);
@@ -186,6 +182,7 @@ a:hover {
 }
 
 #content {
+    height: 100vh;
     border-radius: var(--radius);
 }
 
