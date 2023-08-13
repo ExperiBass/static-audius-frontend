@@ -1,0 +1,19 @@
+@import './main.css';
+
+.searchcontent {
+    position: relative;
+    border: var(--border);
+    border-radius: var(--radius);
+    padding: var(--micro-gap);
+}
+.searchcontent:after {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background-image: var(--inline-gradient);
+    pointer-events: none;
+}

@@ -22,16 +22,7 @@
                     content.innerText = "The query URL param is missing!"
                     return
                 }
-                const trackRequest = makeRequest(`tracks/search`, { query: query })
-                const playlistRequest = makeRequest(`playlists/search`, { query: query })
-                const artistRequest = makeRequest(`users/search`, { query: query })
 
-                const results = await Promise.allSettled([trackRequest, playlistRequest, artistRequest])
-                window.results = results
-
-                const [trackResult, playlistResult, artistResult] = results
-
-                // build the result divs
                 content.innerHTML = `
                     <h3>Tracks</h3>
                     <div id="tracks" class="searchcontent row"></div>
@@ -40,6 +31,16 @@
                     <h3>Users</h3>
                     <div id="artists" class="searchcontent row"></div>
                 `
+
+                const trackRequest = makeRequest(`tracks/search`, { query: query })
+                const playlistRequest = makeRequest(`playlists/search`, { query: query })
+                const artistRequest = makeRequest(`users/search`, { query: query })
+
+                const results = await Promise.allSettled([trackRequest, playlistRequest, artistRequest])
+
+                const [trackResult, playlistResult, artistResult] = results
+
+                // build the result divs
 
                 const tracksDiv = document.getElementById('tracks')
                 const playlistsDiv = document.getElementById('playlists')
@@ -131,7 +132,7 @@
                                         </div>
                                         <div class="contentinfo">
                                             <span class="stats followers">${artist.follower_count ? `${numeral(artist.follower_count).format()}`
-                                                : "0"} Followers</span>
+                                    : "0"} Followers</span>
                                         </div>
                                     </div>
                                 </div>

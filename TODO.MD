@@ -1,5 +1,6 @@
 - [ ] make site work
-- - [ ] make content div scroll independently
+- - [x] make content div scroll independently
+- - [ ] split css into categorized files
 - - [ ] add artists page
 - - - [x] make it work
 - - - [x] paginate content
