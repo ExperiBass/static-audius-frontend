@@ -37,10 +37,10 @@
                                         <span class="stats">${numeral(track.repost_count).format()} reposts</span>
                                     </div>
                                     <div class="contentstats">
-                                        <span>Released <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                                        <span>Released<span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
                             "No Release Date"}</span></span>
-                                        <span>Genre: <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
-                                        <span>Mood: <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
+                                        <span>Genre<span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
+                                        <span>Mood<span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
                                     </div>
                                     <div class="tags">
                                         ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
