@@ -1,4 +1,5 @@
 - [ ] make site work
+- - [ ] make content div scroll independently
 - - [ ] add artists page
 - - - [x] make it work
 - - - [x] paginate content
