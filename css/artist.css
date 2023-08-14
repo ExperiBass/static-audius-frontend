@@ -1,17 +1,17 @@
 @import './main.css';
 
-/* .contentcard:first-child {
+/* .card:first-child {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-top: none;
 } */
-#artistcard>.cardmaincontent>.blur>.contentstats {
+#artistcard>.cardcontent>.blur>.contentstats {
     margin-bottom: var(--half-gap);
 }
-#artistcard>.cardmaincontent>.blur>.contentdescription {
+#artistcard>.cardcontent>.blur>.contentdescription {
     width: fit-content;
 }
-#artistcard>.cardmaincontent>.blur>.tags {
+#artistcard>.cardcontent>.blur>.tags {
     margin-top: auto;
 }
 

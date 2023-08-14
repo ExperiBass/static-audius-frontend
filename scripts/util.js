@@ -98,6 +98,88 @@ function parseQuery(location) {
     return new URLSearchParams(location.search)
 }
 
+// builders
+
+function buildTrackList(tracks, options = {
+    artworkSize: '480x480',
+    display: {
+        artistName: true,
+        stats: true,
+        extendedStats: true,
+        tags: true,
+    }
+}) {
+
+    if (!options.artworkSize) {
+        options.artworkSize = '480x480'
+    }
+    if (options.display.artistName === undefined) {
+        options.display.artistName = true
+    }
+    if (options.display.stats === undefined) {
+        options.display.stats = true
+    }
+    if (options.display.extendedStats === undefined) {
+        options.display.extendedStats = true
+    }
+    if (options.display.tags === undefined) {
+        options.display.tags = true
+    }
+    let elmstr = ""
+    for (const track of tracks) {
+        let trackCard = `
+        <div class="card">
+            <div class="artworkcontainer">
+                <img class="artwork" src="${track.artwork[options.artworkSize]}" />
+            </div>
+            <div class="cardcontent">
+                <div class="contenttitle">
+                    <a class="title" href="./track.html?track=${track.id}">
+                        ${track.title}
+                    </a>
+                    ${options.display.artistName
+                        ? `<span class="artistname">${track.user.name}</span>`
+                        : ""}
+                </div>
+        `
+
+        if (options.display.stats) {
+            trackCard += `
+                <div class="contentstats">
+                    <span class="stats">${buildTimestamp(track.duration)}</span>
+                    <span class="stats">${numeral(track.play_count).format()} plays</span>
+                    <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
+                    <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                </div>
+            `
+
+        }
+        if (options.display.extendedStats) {
+            trackCard += `
+                <div class="contentstats">
+                    <span>Released<span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                    "No Release Date"}</span></span>
+                    <span>Genre<span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
+                    <span>Mood<span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
+                </div>
+            `
+        }
+        if (options.display.tags) {
+            trackCard += `
+                <div class="contentstats tags">
+                    ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
+                </div>
+            `
+        }
+        trackCard += `
+                </div>
+            </div>
+            `
+        elmstr += trackCard
+    }
+    return elmstr
+}
+
 class Pageinator5000 {
     #containerElm = null
     #prevButton = null
@@ -105,6 +187,7 @@ class Pageinator5000 {
     #offset = null
     #endpoint = null
     #limit = null
+    #end = null
     #contentFunction = null
     #cache = {}
     constructor({
@@ -134,7 +217,7 @@ class Pageinator5000 {
     }
     async #request() {
         console.log(this.#offset)
-        return await requestJSON(this.#endpoint, {offset: this.#offset, limit: this.#limit})
+        return await requestJSON(this.#endpoint, {offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc'})
     }
     async start() {
         const data = await this.#request()
@@ -150,15 +233,21 @@ class Pageinator5000 {
         this.#lockButtons()
         this.#offset += this.#limit
 
+        if (this.#offset >= this.#end) {
+            // TODO: make this more robust
+
+            return this.#prevButton.disabled = false
+        }
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
             this.#unlockButtons()
             return
         }
         const data = await this.#request()
-
-        if (!data) {
+        if (!data || !data[0]) {
             this.#unlockButtons()
+            this.#end = this.#offset
+            this.#offset -= this.#limit
             return
         }
         const res = this.#contentFunction(data)
@@ -180,9 +269,9 @@ class Pageinator5000 {
         if (!data) {
             return
         }
+        const res = this.#contentFunction(data)
         this.#containerElm.innerHTML = res
         this.#cache[this.#offset] = res
-        this.#containerElm.innerHTML = this.#contentFunction(data)
         this.#unlockButtons()
     }
 }

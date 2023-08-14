@@ -10,7 +10,7 @@
 
     --bottom-gradient: -webkit-linear-gradient(top,
             #0000 0%,
-            #0000 80%,
+            #0000 90%,
             var(--background-color) 100%);
     --inline-gradient: -webkit-linear-gradient(left,
             var(--background-color) 0%,
@@ -35,6 +35,8 @@ span {
 img {
     width: 100%;
     border-radius: var(--radius);
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
 }
 
 hr {
@@ -201,7 +203,7 @@ a:hover {
     flex: 1;
 }
 
-.contentcard {
+.card {
     display: flex;
     flex-wrap: wrap;
     flex: 1;
@@ -215,7 +217,7 @@ a:hover {
     justify-content: space-between;
 }
 
-.minicontentcard {
+.minicard {
     min-width: 15%;
     max-width: 15%;
     justify-content: start;
@@ -225,11 +227,11 @@ a:hover {
     flex: 0;
 }
 
-.minicontentcard>.artworkcontainer {
+.minicard>.artworkcontainer {
     max-width: 100%;
 }
 
-.minicontentcard>.cardmaincontent>.tags {
+.minicard>.cardcontent>.tags {
     width: 100%;
 }
 
@@ -239,7 +241,7 @@ a:hover {
     width: 100%;
 }
 
-.cardmaincontent {
+.cardcontent {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -264,7 +266,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--quarter-gap);
+    gap: var(--half-gap);
 }
 
 .artworkcontainer {
@@ -272,9 +274,5 @@ a:hover {
     flex-shrink: 1;
     max-width: 15%;
     margin-bottom: auto;
-}
-
-.artwork {
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
+    /* margin-top: auto; */
 }

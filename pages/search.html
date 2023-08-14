@@ -53,11 +53,11 @@
 
                         for (const track of tracks) {
                             const elmstr = `
-                                <div class="contentcard minicontentcard">
+                                <div class="card minicard">
                                     <div class="artworkcontainer">
                                         <img class="artwork" src="${track.artwork['480x480']}" />
                                     </div>
-                                    <div class="cardmaincontent">
+                                    <div class="cardcontent">
                                         <div class="contenttitle">
                                             <a id="track-${track.id}" href="./track.html?track=${track.id}"><span class="title">${track.title}</span></a>
                                             <a id="artist-${track.user.handle}" href="./artist.html?artist=${track.user.handle}">
@@ -85,11 +85,11 @@
 
                         for (const playlist of playlists) {
                             const elmstr = `
-                                <div class="contentcard minicontentcard">
+                                <div class="card minicard">
                                     <div class="artworkcontainer">
                                         <img class="artwork" src="${playlist.artwork['480x480']}" />
                                     </div>
-                                    <div class="cardmaincontent">
+                                    <div class="cardcontent">
                                         <div class="contenttitle">
                                             <a id="playlist-${playlist.id}" href="./playlist.html?playlist=${playlist.id}">
                                                 <span class="title playlistname">${playlist.playlist_name}</span>
@@ -118,11 +118,11 @@
 
                         for (const artist of artists) {
                             const elmstr = `
-                                <div class="contentcard minicontentcard">
+                                <div class="card minicard">
                                     <div class="artworkcontainer">
                                         <img class="artwork" src="${artist.profile_picture['480x480']}" />
                                     </div>
-                                    <div class="cardmaincontent">
+                                    <div class="cardcontent">
                                         <div class="contenttitle">
                                             <a href="./artist.html?artist=${artist.name}">
                                             <span class="title artistname">${artist.name}</span>

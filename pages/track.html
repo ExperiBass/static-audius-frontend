@@ -30,11 +30,11 @@
                 document.title = `${track.title}`
 
                 const elmstr = `
-                    <div class="contentcard">
+                    <div class="card">
                         <div class="artworkcontainer">
                             <img class="artwork" src="${track.artwork['1000x1000']}" />
                         </div>
-                        <div class="cardmaincontent">
+                        <div class="cardcontent">
                             <div class="contenttitle">
                                 <span class="title">${track.title}</span>
                                 <a id="artist-${track.user.handle}" href="./artist.html?artist=${track.user.handle}">
