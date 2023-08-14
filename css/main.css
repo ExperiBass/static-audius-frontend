@@ -1,4 +1,4 @@
-@import './themes/midnight.css';
+@import './themes/audyus.css';
 
 :root {
     --gap: 1rem;
@@ -23,6 +23,8 @@ html,
 body {
     height: 100%;
     display: flex;
+    flex: 1;
+    flex-direction: column;
     background-color: var(--background-color);
     color: var(--primary-color);
     margin: 0;

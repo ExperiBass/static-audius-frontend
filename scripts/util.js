@@ -6,7 +6,7 @@ async function requestJSON(endpoint, additionalQueries) {
 async function requestHTML(snippet) {
     const res = await (await fetch(`/html/${snippet}.html`)).text()
 
-    return res || null
+    return cleanHTML(res) || null
 }
 
 async function makeRequest(endpoint, additionalQueries, fetchOptions) {
@@ -85,9 +85,9 @@ function reformatDate(datestr) {
 
     return preres.split(' ').slice(0, 4).join(' ')
 }
-
+// remove newlines and spaces
 function cleanHTML(html) {
-    return html.replace(/(\n| {2,})/g, '')
+    return html?.replace(/(\n| {2,})/g, '')
 }
 
 function readCookie(name) {
@@ -107,28 +107,22 @@ function buildTrackList(tracks, options = {
         stats: true,
         extendedStats: true,
         tags: true,
+        position: false,
+        ranking: false
     }
 }) {
 
+    // why js? 
     if (!options.artworkSize) {
         options.artworkSize = '480x480'
     }
-    if (options.display.artistName === undefined) {
-        options.display.artistName = true
-    }
-    if (options.display.stats === undefined) {
-        options.display.stats = true
-    }
-    if (options.display.extendedStats === undefined) {
-        options.display.extendedStats = true
-    }
-    if (options.display.tags === undefined) {
-        options.display.tags = true
-    }
+
     let elmstr = ""
-    for (const track of tracks) {
+    console.log(options.display.ranking)
+    for (let i = 0; i < tracks.length; i++) {
+        const track = tracks[i]
         let trackCard = `
-        <div class="card">
+        <div class="card" ${options.display.ranking ? `${colors[i] ? `style="border-color: ${colors[i]}"` : ""}` : ""}>
             <div class="artworkcontainer">
                 <img class="artwork" src="${track.artwork[options.artworkSize]}" />
             </div>
@@ -137,13 +131,17 @@ function buildTrackList(tracks, options = {
                     <a class="title" href="./track.html?track=${track.id}">
                         ${track.title}
                     </a>
-                    ${options.display.artistName
-                        ? `<span class="artistname">${track.user.name}</span>`
+                    ${options.display.artistName !== false
+                        ? `
+                            <a class="artistname" href="./artist.html?artist=${track.user.handle}">
+                                ${track.user.name}
+                            </a>
+                          `
                         : ""}
                 </div>
         `
 
-        if (options.display.stats) {
+        if (options.display.stats !== false) {
             trackCard += `
                 <div class="contentstats">
                     <span class="stats">${buildTimestamp(track.duration)}</span>
@@ -154,7 +152,7 @@ function buildTrackList(tracks, options = {
             `
 
         }
-        if (options.display.extendedStats) {
+        if (options.display.extendedStats !== false) {
             trackCard += `
                 <div class="contentstats">
                     <span>Released<span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
@@ -164,20 +162,35 @@ function buildTrackList(tracks, options = {
                 </div>
             `
         }
-        if (options.display.tags) {
+        if (options.display.tags !== false) {
             trackCard += `
                 <div class="contentstats tags">
                     ${track.tags ? buildTags(track.tags) : buildTags("No Tags")}
                 </div>
             `
         }
-        trackCard += `
+        if (options.display.position) {
+            let coloring = ""
+            if (options.display.ranking) {
+                coloring = colors[i] ? `style="font-weight:bold;color: ${colors[i]}"` : ""
+            }
+            trackCard += `
+                </div>
+                <div class="position">
+                    <span ${coloring}>#${i + 1}</span>
                 </div>
             </div>
             `
+        } else {
+            trackCard += `
+                </div>
+            </div>
+            `
+        }
+
         elmstr += trackCard
     }
-    return elmstr
+    return cleanHTML(elmstr)
 }
 
 class Pageinator5000 {
