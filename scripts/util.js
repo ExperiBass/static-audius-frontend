@@ -238,7 +238,6 @@ class Pageinator5000 {
         this.#nextButton.disabled = false
     }
     async #request() {
-        console.log(this.#offset)
         return await requestJSON(this.#endpoint, { offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc' })
     }
     async start() {
@@ -257,7 +256,6 @@ class Pageinator5000 {
 
         if (this.#offset >= this.#end) {
             // TODO: make this more robust
-
             return this.#prevButton.disabled = false
         }
         if (this.#cache[this.#offset]) {
@@ -281,6 +279,9 @@ class Pageinator5000 {
         this.#lockButtons()
         this.#offset = Math.max(0, this.#offset - this.#limit)
 
+        if (this.#offset <= 0) {
+            return this.#prevButton.disabled = true
+        }
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
             this.#unlockButtons()

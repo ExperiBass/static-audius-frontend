@@ -5,9 +5,6 @@
     border-top-right-radius: 0px;
     border-top: none;
 } */
-#artistcard>.cardcontent>.blur>.contentstats {
-    margin-bottom: var(--half-gap);
-}
 #artistcard>.cardcontent>.blur>.contentdescription {
     width: fit-content;
 }
@@ -52,4 +49,9 @@
     display: inline-flex;
     flex-direction: row;
     gap: var(--quarter-gap);
+}
+
+.cardcontent>.blur {
+    width:fit-content;
+    padding: var(--quarter-gap);
 }
