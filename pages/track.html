@@ -21,8 +21,7 @@
 
                 if (!trackID) {
                     // needs some sort of error
-                    content.innerText = "The track url param is missing!"
-                    return
+                    throw new Error("The track url param is missing!")
                 }
                 const track = await requestJSON(`tracks/${trackID}`)
                 const stream = await getStreamURL(trackID)
@@ -66,6 +65,8 @@
                     `
 
                 content.innerHTML = elmstr
+            }).catch(e => {
+                content.innerText = e
             })
         </script>
     </body>

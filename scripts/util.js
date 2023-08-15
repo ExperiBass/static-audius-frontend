@@ -118,7 +118,7 @@ function buildTrackList(tracks, options = {
     }
 
     let elmstr = ""
-    console.log(options.display.ranking)
+
     for (let i = 0; i < tracks.length; i++) {
         const track = tracks[i]
         let trackCard = `

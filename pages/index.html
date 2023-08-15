@@ -17,6 +17,8 @@
                 const content = document.getElementById('content')
                 const tracks = await requestJSON('tracks/trending')
                 content.innerHTML = buildTrackList(tracks, {display:{ranking:true, position: true}})
+            }).catch(e => {
+                content.innerText = e
             })
         </script>
     </body>

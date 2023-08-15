@@ -20,8 +20,7 @@
                 const query = sanitizeInput(parseQuery(window.location).get('query'))
 
                 if (!query) {
-                    content.innerText = "The query URL param is missing!"
-                    return
+                    throw Error("The query URL param is missing!")
                 }
                 searchInput.placeholder = query
 
@@ -150,6 +149,8 @@
                     }
                     populateArtists()
                 }
+            }).catch(e => {
+                content.innerText = e
             })
         </script>
     </body>

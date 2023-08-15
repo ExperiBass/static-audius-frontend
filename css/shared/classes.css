@@ -29,7 +29,7 @@
 
 .blur {
     border-radius: var(--radius);
-    backdrop-filter: blur(var(--quarter-gap)) brightness(50%);
+    backdrop-filter: blur(var(--smaller-gap)) brightness(30%);
 }
 
 .buttons {

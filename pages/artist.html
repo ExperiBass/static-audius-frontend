@@ -54,8 +54,7 @@
                 const artistName = parseQuery(window.location).get('artist')
 
                 if (!artistName) {
-                    // needs some sort of error
-                    content.innerText = "The artist url param is missing!"
+                    throw new Error("The artist url param is missing!")
                     return
                 }
                 const artist = await requestJSON(`users/handle/${artistName}`)
@@ -141,9 +140,11 @@
 
                 // set button listeners
                 const onclick = (ev) => { window._selectedContent = ev.target.id }
-                for (const button of document.getElementById('artistcontentswitcher').children) {
+                /*for (const button of document.getElementById('artistcontentswitcher').children) {
                     button.onclick = onclick
-                }
+                }*/
+            }).catch(e => {
+                content.innerText = e
             })
         </script>
     </body>
