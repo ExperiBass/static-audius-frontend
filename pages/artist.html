@@ -80,14 +80,14 @@
                                         <span>${artist.bio ? `${nToBr(artist.bio)}` : ""}<span>
                                     </div>
                                     <div class="contentstats">
+                                        <span class="stats tracks">${artist.track_count ? `${numeral(artist.track_count).format()}`
+                        : "0"} Tracks</span>
                                         <span class="stats followers">${artist.follower_count ? `${numeral(artist.follower_count).format()}`
                         : "0"} Followers</span>
                                         <span class="stats following">${artist.followee_count ? `${numeral(artist.followee_count).format()}`
                         : "0"} Following</span>
                                         <span class="stats reposts">${artist.repost_count ? `${numeral(artist.repost_count).format()}`
                         : "0"} Reposts</span>
-                                        <span class="stats tracks">${artist.track_count ? `${numeral(artist.track_count).format()}`
-                        : "0"} Tracks</span>
                                         <span class="stats albums">${artist.album_count ? `${numeral(artist.album_count).format()}`
                         : "0"} Albums</span>
                                         <span class="stats playlists">${artist.playlist_count ? `${numeral(artist.playlist_count).format()}`

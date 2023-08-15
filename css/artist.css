@@ -51,6 +51,11 @@
     gap: var(--quarter-gap);
 }
 
+#artistcontent {
+    /* ignore .column scrolling */
+    overflow-y: visible;
+}
+
 .cardcontent>.blur {
     width:fit-content;
     padding: var(--quarter-gap);
