@@ -5,6 +5,7 @@
     border: var(--border);
     border-radius: var(--radius);
     padding: var(--micro-gap);
+    /* overflow-y: unset; */
 }
 .searchcontent:after {
     content:'';
@@ -15,5 +16,6 @@
     height: 100%;
     display: inline-block;
     background-image: var(--inline-gradient);
+    border-radius: var(--radius);
     pointer-events: none;
 }

@@ -65,7 +65,7 @@
                 document.title = `${artist.name}`
 
                 let elmstr = `
-                        <div id="artistcard" class="card" style="background-image:var(--bottom-gradient),url('${artist.cover_photo['2000x']}');">
+                        <div id="artistcard" class="card" style="background-image:var(--bottom-gradient)${artist.cover_photo ? `,url('${artist.cover_photo['2000x']}');` : ""}">
                             <div class="artworkcontainer">
                                 <img class="artwork" src="${artist.profile_picture['1000x1000']}" />
                             </div>

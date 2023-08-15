@@ -1,10 +1,10 @@
 - [ ] make site work
 - - [x] make content div scroll independently
 - - [ ] split css into categorized files
-- - [ ] add artists page
+- - [x] add artists page
 - - - [x] make it work
 - - - [x] paginate content
-- - - [ ] display albums and playlists (how lol, api doesnt give me that)
+- - - [?] display albums and playlists (how lol, api doesnt give me that)
 - - - [x] fix the blur so the text is clear on all backgrounds
 - - [x] add search page
 - - [ ] add playlist page

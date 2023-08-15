@@ -25,14 +25,14 @@ async function makeRequest(endpoint, additionalQueries, fetchOptions) {
             res = await fetch(`${provider}/v1/${endpoint}?${querystr}`, fetchOptions)
             //res = await fetch('/json/response.json')
             break fetchLoop
-        } catch(e) {
+        } catch (e) {
             console.error(`Request to "${provider}" failed: ${e.stack}`)
         }
     }
     return res
 }
 async function getStreamURL(track) {
-    const req = await makeRequest(`tracks/${track}/stream`, {redirect:'follow'})
+    const req = await makeRequest(`tracks/${track}/stream`, { redirect: 'follow' })
     return req.url
 }
 
@@ -112,7 +112,7 @@ function buildTrackList(tracks, options = {
     }
 }) {
 
-    // why js? 
+    // why js?
     if (!options.artworkSize) {
         options.artworkSize = '480x480'
     }
@@ -132,22 +132,22 @@ function buildTrackList(tracks, options = {
                         ${track.title}
                     </a>
                     ${options.display.artistName !== false
-                        ? `
+                ? `
                             <a class="artistname" href="./artist.html?artist=${track.user.handle}">
                                 ${track.user.name}
                             </a>
                           `
-                        : ""}
+                : ""}
                 </div>
         `
 
         if (options.display.stats !== false) {
             trackCard += `
                 <div class="contentstats">
-                    <span class="stats">${buildTimestamp(track.duration)}</span>
-                    <span class="stats">${numeral(track.play_count).format()} plays</span>
-                    <span class="stats">${numeral(track.favorite_count).format()} favorites</span>
-                    <span class="stats">${numeral(track.repost_count).format()} reposts</span>
+                    <span class="stats duration">${buildTimestamp(track.duration)}</span>
+                    <span class="stats playcount">${numeral(track.play_count).format()} plays</span>
+                    <span class="stats favoritecount">${numeral(track.favorite_count).format()} favorites</span>
+                    <span class="stats repostcount">${numeral(track.repost_count).format()} reposts</span>
                 </div>
             `
 
@@ -155,10 +155,19 @@ function buildTrackList(tracks, options = {
         if (options.display.extendedStats !== false) {
             trackCard += `
                 <div class="contentstats">
-                    <span>Released<span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
-                    "No Release Date"}</span></span>
-                    <span>Genre<span class="stats genre">${track.genre ? track.genre : "No Genre"}</span></span>
-                    <span>Mood<span class="stats mood">${track.mood ? track.mood : "No Mood"}</span></span>
+                    <span>
+                        <span class="statstitle">Released</span>
+                        <span class="stats releasedate">${track.release_date ? `${reformatDate(track.release_date)}` :
+                    "No Release Date"}</span>
+                        </span>
+                    <span>
+                        <span class="statstitle">Genre</span>
+                        <span class="stats genre">${track.genre ? track.genre : "No Genre"}</span>
+                        </span>
+                    <span>
+                        <span class="statstitle">Mood</span>
+                        <span class="stats mood">${track.mood ? track.mood : "No Mood"}</span>
+                        </span>
                 </div>
             `
         }
@@ -230,7 +239,7 @@ class Pageinator5000 {
     }
     async #request() {
         console.log(this.#offset)
-        return await requestJSON(this.#endpoint, {offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc'})
+        return await requestJSON(this.#endpoint, { offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc' })
     }
     async start() {
         const data = await this.#request()

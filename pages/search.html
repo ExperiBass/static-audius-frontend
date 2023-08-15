@@ -16,20 +16,28 @@
         <script>
             init().then(async () => {
                 const content = document.getElementById('content')
+                const searchInput = document.getElementById('searchforminput')
                 const query = sanitizeInput(parseQuery(window.location).get('query'))
 
                 if (!query) {
                     content.innerText = "The query URL param is missing!"
                     return
                 }
+                searchInput.placeholder = query
 
                 content.innerHTML = `
-                    <h3>Tracks</h3>
-                    <div id="tracks" class="searchcontent row"></div>
-                    <h3>Playlists</h3>
-                    <div id="playlists" class="searchcontent row"></div>
-                    <h3>Users</h3>
-                    <div id="artists" class="searchcontent row"></div>
+                    <h1>Tracks</h1>
+                    <div class="searchcontent">
+                        <div id="tracks" class="row"></div>
+                    </div>
+                    <h1>Playlists</h1>
+                    <div class="searchcontent">
+                        <div id="playlists" class="row"></div>
+                    </div>
+                    <h1>Users</h1>
+                    <div class="searchcontent">
+                        <div id="artists" class="row"></div>
+                    </div>
                 `
 
                 const trackRequest = makeRequest(`tracks/search`, { query: query })
