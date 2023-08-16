@@ -7,15 +7,11 @@
 - - - [?] display albums and playlists (how lol, api doesnt give me that)
 - - - [x] fix the blur so the text is clear on all backgrounds
 - - [x] add search page
-- - [ ] add playlist page
+- - [?] add playlist page
 - - [ ] make urls in descriptions clickable
-- - [ ] add radio feature (random in tag/genre/mood?)
-- - [ ] ERRORS
-- - - [ ] artist
-- - - [ ] index
-- - - [ ] playlist
-- - - [ ] search
-- - - [ ] track
+- - [?] add radio feature (random in tag/genre/mood?)
+- - [x] ERRORS
+- - - i mean its there
 - [ ] pretty up site
 - - [ ] display provider
 - - [ ] loading indicators

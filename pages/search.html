@@ -25,6 +25,10 @@
                 searchInput.placeholder = query
 
                 content.innerHTML = `
+                    <h1>Users</h1>
+                        <div class="searchcontent">
+                            <div id="artists" class="row"></div>
+                    </div>
                     <h1>Tracks</h1>
                     <div class="searchcontent">
                         <div id="tracks" class="row"></div>
@@ -33,15 +37,11 @@
                     <div class="searchcontent">
                         <div id="playlists" class="row"></div>
                     </div>
-                    <h1>Users</h1>
-                    <div class="searchcontent">
-                        <div id="artists" class="row"></div>
-                    </div>
                 `
 
-                const trackRequest = makeRequest(`tracks/search`, { query: query })
-                const playlistRequest = makeRequest(`playlists/search`, { query: query })
-                const artistRequest = makeRequest(`users/search`, { query: query })
+                const trackRequest = requestJSON(`tracks/search`, { query: query })
+                const playlistRequest = requestJSON(`playlists/search`, { query: query })
+                const artistRequest = requestJSON(`users/search`, { query: query })
 
                 const results = await Promise.allSettled([trackRequest, playlistRequest, artistRequest])
 
@@ -56,9 +56,7 @@
                 if (trackResult.status === "fulfilled") {
                     // wrap in a async function so the three divs can be populated "parallely"
                     async function populatePlaylists() {
-                        const tracks = (await trackResult.value.json()).data
-
-                        for (const track of tracks) {
+                        for (const track of trackResult.value) {
                             const elmstr = `
                                 <div class="card minicard">
                                     <div class="artworkcontainer">
@@ -88,9 +86,7 @@
 
                 if (playlistResult.status === "fulfilled") {
                     async function populatePlaylists() {
-                        const playlists = (await playlistResult.value.json()).data
-
-                        for (const playlist of playlists) {
+                        for (const playlist of playlistResult.value) {
                             const elmstr = `
                                 <div class="card minicard">
                                     <div class="artworkcontainer">
@@ -121,9 +117,9 @@
 
                 if (artistResult.status === "fulfilled") {
                     async function populateArtists() {
-                        const artists = (await artistResult.value.json()).data
 
-                        for (const artist of artists) {
+
+                        for (const artist of artistResult.value) {
                             const elmstr = `
                                 <div class="card minicard">
                                     <div class="artworkcontainer">

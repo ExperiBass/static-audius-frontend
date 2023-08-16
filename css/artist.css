@@ -57,6 +57,7 @@
 }
 
 .cardcontent>.blur {
+    max-width: 75%;
     width:fit-content;
     padding: var(--quarter-gap);
 }
