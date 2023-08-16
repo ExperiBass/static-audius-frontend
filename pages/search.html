@@ -39,9 +39,9 @@
                     </div>
                 `
 
-                const trackRequest = requestJSON(`tracks/search`, { query: query })
-                const playlistRequest = requestJSON(`playlists/search`, { query: query })
-                const artistRequest = requestJSON(`users/search`, { query: query })
+                const trackRequest = makeAudiusRequest(`tracks/search`, { query: query })
+                const playlistRequest = makeAudiusRequest(`playlists/search`, { query: query })
+                const artistRequest = makeAudiusRequest(`users/search`, { query: query })
 
                 const results = await Promise.allSettled([trackRequest, playlistRequest, artistRequest])
 

@@ -23,7 +23,7 @@
                     // needs some sort of error
                     throw new Error("The track url param is missing!")
                 }
-                const track = await requestJSON(`tracks/${trackID}`)
+                const track = await makeAudiusRequest(`tracks/${trackID}`)
                 const stream = await getStreamURL(trackID)
 
                 document.title = `${track.title}`

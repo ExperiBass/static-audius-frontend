@@ -57,8 +57,8 @@
                     throw new Error("The artist url param is missing!")
                     return
                 }
-                const artist = await requestJSON(`users/handle/${artistName}`)
-                const commonlyUsedTags = await requestJSON(`users/${artist.id}/tags`, { limit: 5 })
+                const artist = await makeAudiusRequest(`users/handle/${artistName}`)
+                const commonlyUsedTags = await makeAudiusRequest(`users/${artist.id}/tags`, { limit: 5 })
 
 
                 document.title = `${artist.name}`

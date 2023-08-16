@@ -1,4 +1,4 @@
-async function requestJSON(endpoint, additionalQueries) {
+async function makeAudiusRequest(endpoint, additionalQueries) {
     const res = await (await makeRequest(endpoint, additionalQueries)).json()
 
     return res.data ? res.data : res
@@ -239,7 +239,7 @@ class Pageinator5000 {
         this.#nextButton.disabled = false
     }
     async #request() {
-        return await requestJSON(this.#endpoint, { offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc' })
+        return await makeAudiusRequest(this.#endpoint, { offset: this.#offset, limit: this.#limit, sort_method: 'release_date', sort_direction: 'desc' })
     }
     async start() {
         const data = await this.#request()
