@@ -16,7 +16,8 @@
             init().then(async () => {
                 const content = document.getElementById('content')
                 const tracks = await makeAudiusRequest('tracks/trending')
-                content.innerHTML = buildTrackList(tracks, {display:{ranking:true, position: true}})
+                content.innerHTML = `Provider: ${window._provider}`
+                content.innerHTML += buildTrackList(tracks, {display:{ranking:true, position: true}})
                 content.innerHTML += `<div class="overscroll"></div>`
             }).catch(e => {
                 content.innerText = e

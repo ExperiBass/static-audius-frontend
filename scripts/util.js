@@ -24,6 +24,7 @@ async function makeRequest(endpoint, additionalQueries, fetchOptions) {
         try {
             res = await fetch(`${provider}/v1/${endpoint}?${querystr}`, fetchOptions)
             //res = await fetch('/json/response.json')
+            window._provider = provider
             break fetchLoop
         } catch (e) {
             console.error(`Request to "${provider}" failed: ${e.stack}`)
