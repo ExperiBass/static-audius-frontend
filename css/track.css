@@ -1,7 +1,9 @@
 @import './main.css';
 
 /* overrides */
-
+#contentwrapper::after {
+    background-image: none;
+}
 .artworkcontainer {
     max-width: 30%;
 }

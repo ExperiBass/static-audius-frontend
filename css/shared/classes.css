@@ -11,6 +11,11 @@
     flex: 1;
 }
 
+.overscroll {
+    min-height: 10%;
+    min-width: 5%;
+}
+
 .column {
     display: flex;
     flex-direction: column;

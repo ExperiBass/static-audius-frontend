@@ -114,7 +114,10 @@
                             </div>
                         `
                 */
-                elmstr += '<div id="artistcontent" class="column"></div>'
+                elmstr += `
+                    <div id="artistcontent" class="column"></div>
+                    <div class="overscroll"></div>
+                `
                 content.innerHTML = cleanHTML(elmstr)
 
                 // now, start paginating the tracks

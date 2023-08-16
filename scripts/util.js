@@ -41,7 +41,8 @@ function nToBr(str) {
 }
 
 function sanitizeInput(str) {
-    return str?.replace(/[^a-z0-9_-]/gi, '').trim()
+    return str?.replace(/ /g, '+')
+    .replace(/[^a-z0-9_+-]/gi, '').trim()
 }
 
 
@@ -254,10 +255,10 @@ class Pageinator5000 {
         this.#lockButtons()
         this.#offset += this.#limit
 
-        if (this.#offset >= this.#end) {
+        /*if (this.#offset >= this.#end) {
             // TODO: make this more robust
             return this.#prevButton.disabled = false
-        }
+        }*/
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
             this.#unlockButtons()
@@ -279,9 +280,9 @@ class Pageinator5000 {
         this.#lockButtons()
         this.#offset = Math.max(0, this.#offset - this.#limit)
 
-        if (this.#offset <= 0) {
-            return this.#prevButton.disabled = true
-        }
+        // if (this.#offset <= 0) {
+        //     return this.#prevButton.disabled = true
+        // }
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
             this.#unlockButtons()
