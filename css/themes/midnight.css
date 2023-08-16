@@ -2,14 +2,8 @@
     --primary-color: #c780ff;
     --secondary-color: #2c00a6;
     /* --secondary-color: #150050; */
-    --tertiary-color: #4446;
+    --stats-color: #4446;
     --text-color: #BEC5E0;
     --link-color: #FB2576;
     --background-color: #000000;
-
-    --border: 1px solid var(--secondary-color);
-}
-
-.statstitle, .position {
-    color: var(--primary-color);
 }

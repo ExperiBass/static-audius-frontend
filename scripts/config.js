@@ -8,7 +8,9 @@ const config = {
     // true if you want dates to be in your local timezone, false for utc-0
     localDate: false,
     // NumeralJS number format string
-    numberFormat: '0,0a'
+    numberFormat: '0,0a',
+    // color theme
+    theme: 'audyus'
 }
 
 window._config = config

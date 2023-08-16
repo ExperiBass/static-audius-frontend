@@ -63,7 +63,7 @@
 .stats {
     display: flex;
     width: fit-content;
-    background-color: var(--tertiary-color);
+    background-color: var(--stats-color);
     border-radius: var(--radius);
     padding: var(--quarter-gap);
     flex-shrink: 1;
@@ -148,4 +148,8 @@
     max-width: 15%;
     margin-bottom: auto;
     /* margin-top: auto; */
+}
+
+.statstitle, .position {
+    color: var(--primary-color);
 }

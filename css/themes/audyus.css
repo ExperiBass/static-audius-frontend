@@ -1,11 +1,11 @@
 /* totally not a audius clone */
 :root {
-    --primary-color: #BEC5E0;
+    --text-color: #BEC5E0;
+    --primary-color: #9e5dd2;
     --secondary-color: #9147CC;
-    --tertiary-color: #32334D66;
+    --stats-color: #32334D66;
     --quadrary-color: #582481;
     --link-color: #C74BD3;
-    --link-hover-color: #696D88;
     --background-color: #191927;
     --secondary-background-color: #242438;
 

@@ -1,26 +1,27 @@
-@import './themes/midnight.css';
 @import './shared/shared.css';
 
 /* just used to store variables */
 :root {
-    --gap: 1rem;
-    --smaller-gap: calc(var(--gap) * 0.75);
-    --half-gap: calc(var(--gap) * 0.5);
-    --quarter-gap: calc(var(--gap) * 0.25);
-    --micro-gap: calc(var(--gap) * 0.1);
-    --radius: 8px;
+        --border: 1px solid var(--secondary-color);
 
-    --bottom-gradient: -webkit-linear-gradient(top,
-            #0000 0%,
-            #0000 90%,
-            var(--background-color) 100%);
-    --artist-bottom-gradient: -webkit-linear-gradient(top,
-            #0000 0%,
-            #0000 80%,
-            var(--background-color) 100%);
-    --inline-gradient: -webkit-linear-gradient(left,
-            var(--background-color) 0%,
-            #0000 5%,
-            #0000 95%,
-            var(--background-color) 100%);
+        --gap: 1rem;
+        --smaller-gap: calc(var(--gap) * 0.75);
+        --half-gap: calc(var(--gap) * 0.5);
+        --quarter-gap: calc(var(--gap) * 0.25);
+        --micro-gap: calc(var(--gap) * 0.1);
+        --radius: 8px;
+
+        --bottom-gradient: -webkit-linear-gradient(top,
+                        #0000 0%,
+                        #0000 90%,
+                        var(--background-color) 100%);
+        --artist-bottom-gradient: -webkit-linear-gradient(top,
+                        #0000 0%,
+                        #0000 80%,
+                        var(--background-color) 100%);
+        --inline-gradient: -webkit-linear-gradient(left,
+                        var(--background-color) 0%,
+                        #0000 5%,
+                        #0000 95%,
+                        var(--background-color) 100%);
 }
