@@ -1,6 +1,7 @@
 // common listeners and stuff used by the pages
 
 const colors = ['gold', 'silver', '#cd7f32']
+const urlMatchingRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/ig
 
 function loadTheme() {
     const head = document.getElementsByTagName('head')[0]
@@ -32,7 +33,7 @@ function followConfig() {
 async function init() {
     // setup page
     loadTheme()
-    document.body.innerHTML = await requestHTML('basepage')
+    document.body.innerHTML += await requestHTML('basepage')
     followConfig()
     initListeners()
 }

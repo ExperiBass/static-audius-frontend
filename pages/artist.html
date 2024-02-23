@@ -51,7 +51,7 @@
         <script>
             init().then(async () => {
                 const content = document.getElementById('content')
-                const artistName = parseQuery(window.location).get('artist')
+                const artistName = getQuery(window.location).get('artist')
 
                 if (!artistName) {
                     throw new Error("The artist url param is missing!")
@@ -126,6 +126,7 @@
                         containerElm: document.getElementById('artistcontent'),
                         prevButton: document.getElementById('prev'),
                         nextButton: document.getElementById('next'),
+                        max: artist.track_count,
                         endpoint: `users/${artist.id}/tracks`,
                         contentFunction: (tracks) => buildTrackList(tracks, { display: { artistName: false } })
                     }),

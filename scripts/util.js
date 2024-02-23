@@ -12,16 +12,18 @@ async function requestHTML(snippet) {
 async function makeRequest(endpoint, additionalQueries, fetchOptions) {
     let res;
     const query = {
+        ...additionalQueries,
         app_name: `${window._config.clientName}${window._config.clientNick
             ? `-${window._config.clientNick}`
-            : ""}`,
-        ...additionalQueries
+            : ""}`
     }
     const querystr = new URLSearchParams(query).toString()
 
     fetchLoop:
     for (const provider of window._config.discoveryProviders) {
         try {
+            // TODO: use browser cache
+            // browser cache api doesnt respect caching headers tho???
             res = await fetch(`${provider}/v1/${endpoint}?${querystr}`, fetchOptions)
             //res = await fetch('/json/response.json')
             window._provider = provider
@@ -96,8 +98,8 @@ function readCookie(name) {
     const cookie = document.cookie.split('; ').find(v => v.split('=')[0] === name)
     return cookie?.split('=')[1] || null
 }
-function parseQuery(location) {
-    return new URLSearchParams(location.search)
+function getQuery(location) {
+    return (new URLSearchParams(location.search))
 }
 
 // builders
@@ -220,6 +222,7 @@ class Pageinator5000 {
         nextButton,
         initialOffset = 0,
         limit = 10,
+        max,
         endpoint,
         contentFunction
     }) {
@@ -228,14 +231,22 @@ class Pageinator5000 {
         this.#nextButton = nextButton
         this.#offset = initialOffset
         this.#endpoint = endpoint
+        this.#end = max
         this.#limit = limit
         this.#contentFunction = contentFunction
     }
+    // disable and enable buttons based on position
     #lockButtons() {
-        this.#prevButton.disabled = true
-        this.#nextButton.disabled = true
-    }
-    #unlockButtons() {
+        if (!this.#offset) {
+            this.#prevButton.disabled = true
+            this.#nextButton.disabled = false
+            return
+        }
+        if ((this.#offset + this.#limit) >= this.#end) {
+            this.#prevButton.disabled = false
+            this.#nextButton.disabled = true
+            return
+        }
         this.#prevButton.disabled = false
         this.#nextButton.disabled = false
     }
@@ -251,52 +262,40 @@ class Pageinator5000 {
         const res = this.#contentFunction(data)
         this.#containerElm.innerHTML = res
         this.#cache[this.#offset] = res
+        this.#lockButtons()
     }
     async next() {
+        this.#offset = Math.min(this.#end, this.#offset + this.#limit)
         this.#lockButtons()
-        this.#offset += this.#limit
-
-        /*if (this.#offset >= this.#end) {
-            // TODO: make this more robust
-            return this.#prevButton.disabled = false
-        }*/
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
-            this.#unlockButtons()
             return
         }
         const data = await this.#request()
         if (!data || !data[0]) {
-            this.#unlockButtons()
-            this.#end = this.#offset
-            this.#offset -= this.#limit
             return
         }
         const res = this.#contentFunction(data)
         this.#containerElm.innerHTML = res
         this.#cache[this.#offset] = res
-        this.#unlockButtons()
     }
     async prev() {
-        this.#lockButtons()
         this.#offset = Math.max(0, this.#offset - this.#limit)
-
-        // if (this.#offset <= 0) {
-        //     return this.#prevButton.disabled = true
-        // }
+        this.#lockButtons()
         if (this.#cache[this.#offset]) {
             this.#containerElm.innerHTML = this.#cache[this.#offset]
-            this.#unlockButtons()
             return
         }
         // negatives arent allowed
         const data = await this.#request()
-        if (!data) {
+        if (!data || !data[0]) {
             return
         }
         const res = this.#contentFunction(data)
         this.#containerElm.innerHTML = res
         this.#cache[this.#offset] = res
-        this.#unlockButtons()
+    }
+    get prevButton () {
+        return this.#offset
     }
 }

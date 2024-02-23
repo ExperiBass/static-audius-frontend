@@ -17,7 +17,7 @@
             init().then(async () => {
 
                 const content = document.getElementById('content')
-                const trackID = parseQuery(window.location).get('track')
+                const trackID = getQuery(window.location).get('track')
 
                 if (!trackID) {
                     // needs some sort of error

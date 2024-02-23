@@ -1,6 +1,7 @@
 - [ ] make site work
+- - [ ] switch to handlebars-based static builder
 - - [x] make content div scroll independently
-- - [ ] split css into categorized files
+- - [x] split css into categorized files
 - - [x] add artists page
 - - - [x] make it work
 - - - [x] paginate content
@@ -11,9 +12,9 @@
 - - [ ] make urls in descriptions clickable
 - - [?] add radio feature (random in tag/genre/mood?)
 - - [x] ERRORS
-- - - i mean its there
+- - - [?] i mean its there
 - [ ] pretty up site
-- - [ ] display provider
+- - [x] display provider
 - - [ ] loading indicators
 - - [ ] add hover cards on artist links
 - - [ ] custom media player?

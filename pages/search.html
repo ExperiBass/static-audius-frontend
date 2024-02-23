@@ -17,12 +17,12 @@
             init().then(async () => {
                 const content = document.getElementById('content')
                 const searchInput = document.getElementById('searchforminput')
-                const query = sanitizeInput(parseQuery(window.location).get('query'))
+                const query = sanitizeInput(getQuery(window.location).get('query'))
 
                 if (!query) {
                     throw Error("The query URL param is missing!")
                 }
-                searchInput.placeholder = query
+                searchInput.placeholder = query.replace(/\+/g, ' ')
 
                 content.innerHTML = `
                     <h1>Users</h1>
@@ -36,7 +36,7 @@
                     <h1>Playlists</h1>
                     <div class="searchcontent">
                         <div id="playlists" class="row"></div>
-                    </div>
+                    </div><div style="padding: 1rem"></div>
                 `
 
                 const trackRequest = makeAudiusRequest(`tracks/search`, { query: query })
@@ -55,7 +55,7 @@
 
                 if (trackResult.status === "fulfilled") {
                     // wrap in a async function so the three divs can be populated "parallely"
-                    async function populatePlaylists() {
+                    async function populateTracks() {
                         for (const track of trackResult.value) {
                             const elmstr = `
                                 <div class="card minicard">
@@ -81,7 +81,7 @@
                             tracksDiv.innerHTML += elmstr
                         }
                     }
-                    populatePlaylists()
+                    populateTracks()
                 }
 
                 if (playlistResult.status === "fulfilled") {

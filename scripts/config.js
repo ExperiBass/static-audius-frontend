@@ -1,10 +1,10 @@
 const config = {
     // without trailing slash
-    discoveryProviders: ['https://discovery-us-01.audius.openplayer.org'],
+    discoveryProviders: ['https://audius-dp.singapore.creatorseed.com'],
     // base name, shouldnt be changed
     clientName: "static-audius-frontend",
     // better to add a nick
-    clientNick: "",
+    clientNick: "development",
     // true if you want dates to be in your local timezone, false for utc-0
     localDate: false,
     // NumeralJS number format string
